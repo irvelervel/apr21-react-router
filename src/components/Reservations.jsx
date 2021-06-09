@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { ListGroup } from 'react-bootstrap'
+import { Container, Col, Row, ListGroup } from 'react-bootstrap'
 import Loading from './Loading'
 import Error from './Error'
+import ReservationForm from './ReservationForm'
 
 // 1) create some room for the reservations into the state
 // 2) grab the reservations from an endpoint
@@ -49,32 +50,41 @@ const Reservations = () => {
     // render is going to be executed every time there's a change
     // in the STATE or in the PROPS of this component
     return (
-        <>
-            {/* this is called a REACT FRAGMENT, it has no visible effect on your page */}
-            <h3>RESERVATIONS:</h3>
-            {/* {this.state.isLoading ? <Loading /> : <></>} */}
-            {isLoading && <Loading />}
-            {isError && <Error />}
-            {/* because a valid React Component like <Loading /> is always going to be */}
-            {/* a valid statement, the condition to check for the Spinner to appear */}
-            {/* is going to be the left one, your state check */}
-            {/* short circuit operator */}
-            {
-                (
-                    reservations.length === 0
-                    && isLoading === false
-                    && isError === false
-                )
-                    ? <p>NO RESERVATIONS</p>
-                    : <ListGroup>
-                        {reservations.map(reservation =>
-                            <ListGroup.Item key={reservation._id}>
-                                {reservation.name}
-                            </ListGroup.Item>
-                        )}
-                    </ListGroup>
-            }
-        </>
+        <Container>
+            <Row className="justify-content-center mt-3">
+                <Col xs={12} md={6}>
+                    {/* this is called a REACT FRAGMENT, it has no visible effect on your page */}
+                    <h3>RESERVATIONS:</h3>
+                    {/* {this.state.isLoading ? <Loading /> : <></>} */}
+                    {isLoading && <Loading />}
+                    {isError && <Error />}
+                    {/* because a valid React Component like <Loading /> is always going to be */}
+                    {/* a valid statement, the condition to check for the Spinner to appear */}
+                    {/* is going to be the left one, your state check */}
+                    {/* short circuit operator */}
+                    {
+                        (
+                            reservations.length === 0
+                            && isLoading === false
+                            && isError === false
+                        )
+                            ? <p>NO RESERVATIONS</p>
+                            : <ListGroup>
+                                {reservations.map(reservation =>
+                                    <ListGroup.Item key={reservation._id}>
+                                        {reservation.name}
+                                    </ListGroup.Item>
+                                )}
+                            </ListGroup>
+                    }
+                </Col>
+            </Row>
+            <Row className="justify-content-center mt-3">
+                <Col xs={12} md={6}>
+                    <ReservationForm />
+                </Col>
+            </Row>
+        </Container>
     )
 }
 
