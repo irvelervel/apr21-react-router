@@ -8,6 +8,7 @@ const Menu = () => (
             <Row key={dish.id} className="text-center my-2">
                 <Col md={{ span: 8, offset: 2 }}>
                     <Link to={"/details/" + dish.id}>
+                        {/* dish.id will be 2, 3, 1, 0 */}
                         <img src={dish.image} alt="dish pic"></img>
                     </Link>
                     <h4>
